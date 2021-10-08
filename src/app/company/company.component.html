@@ -1,0 +1,5 @@
+<input type=" text" ng-if="companyName" [(ngModel)]="companyName" />   
+<p>{{ companyName }}</p>
+<button type="button" class="btn" [disabled]="!companyName" (click)="onButtonClick()">
+  Button
+</button>
