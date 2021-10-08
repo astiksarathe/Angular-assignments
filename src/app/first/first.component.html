@@ -1,0 +1,12 @@
+<form>
+    <input type="text" placeholder="Name" name="name"  [(ngModel)] = "name" >
+    <input type="number" placeholder="Amount" name="amount"   [(ngModel)] = "amount" >
+    <button [disabled]="productList.length>=5" (click)="onSubmit()">Add</button>
+</form>
+<h1>
+    Product List
+</h1>
+
+<ul>
+    <li *ngFor="let product of productList">Product: {{product.name}}, Amount: {{product.amount}}</li>
+</ul>
