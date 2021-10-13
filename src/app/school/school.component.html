@@ -1,0 +1,5 @@
+<h4>Name of students in school</h4>
+<ul>
+    <li *ngFor="let student of studentList">{{student}} | <span  (click)="schoolToCollege(student)" >set to college</span> </li>
+</ul>
+<!-- (click)="schoolToCollege(student)" -->
