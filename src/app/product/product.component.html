@@ -1,0 +1,14 @@
+
+      <input type="text" placeholder="search.." [(ngModel)]="searchText" />
+      <br />
+      <ul class="list-group">
+        <li
+          class="list-group-item"
+          *ngFor="let product of products |filter:searchText"
+        >
+        Name:  <strong>{{ product.name }}</strong> 
+        <br/>
+        Price:  {{ product.price | currency: "USD":true }}
+        </li>
+      </ul>
+
