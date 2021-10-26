@@ -1,43 +1,41 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable } from "@angular/core";
+import { BehaviorSubject } from "rxjs";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class StudentsService {
-  collegeStudentList = new BehaviorSubject(['Abhay', 'Lokesh']);
-  schoolStudentList = new BehaviorSubject(['Sujal', 'Ashish']);
+  collegeStudentList = new BehaviorSubject(["Abhay", "Lokesh"]);
+  schoolStudentList = new BehaviorSubject(["Sujal", "Ashish"]);
   constructor() {}
 
+  // shifting school student in college student list
   studentToCollege(name: string) {
-    let studentArrayForCollege: any = [];
-    let studentArrayForSchool: any = [];
+    let college: any = [];
+    let student: any = [];
 
-    this.collegeStudentList.subscribe(
-      (res) => (studentArrayForCollege = [...res, name])
-    );
-    this.collegeStudentList.next(studentArrayForCollege);
-    this.schoolStudentList.subscribe((res) => (studentArrayForSchool = res));
-    let indexOfName = studentArrayForSchool.indexOf(name);
+    this.collegeStudentList.subscribe((res) => (college = [...res, name]));
+    this.collegeStudentList.next(college);
+    this.schoolStudentList.subscribe((res) => (student = res));
+    let indexOfName = student.indexOf(name);
     if (indexOfName > -1) {
-      studentArrayForSchool.splice(indexOfName, 1);
+      student.splice(indexOfName, 1);
     }
-    this.schoolStudentList.next(studentArrayForSchool);
+    this.schoolStudentList.next(student);
   }
-  collegeToStudent(name: string) {
-    let studentArrayForCollege: any = [];
-    let studentArrayForSchool: any = [];
 
-    this.schoolStudentList.subscribe(
-      (res) => (studentArrayForSchool = [...res, name])
-    );
-    this.schoolStudentList.next(studentArrayForSchool);
-    //
-    this.collegeStudentList.subscribe((res) => (studentArrayForCollege = res));
-    let indexOfName = studentArrayForCollege.indexOf(name);
-    if (indexOfName > -1) {
-      studentArrayForCollege.splice(indexOfName, 1);
+  // shifting college student in school student list
+  collegeToStudent(name: string) {
+    let college: any = [];
+    let school: any = [];
+    this.schoolStudentList.subscribe((res) => (school = [...res, name]));
+    this.schoolStudentList.next(school);
+
+    this.collegeStudentList.subscribe((res) => (college = res));
+    let index = college.indexOf(name);
+    if (index > -1) {
+      college.splice(index, 1);
     }
-    this.collegeStudentList.next(studentArrayForCollege);
+    this.collegeStudentList.next(college);
   }
 }
